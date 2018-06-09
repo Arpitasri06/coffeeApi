@@ -22,7 +22,7 @@ import edu.mum.coffee.service.PersonService;
 import edu.mum.coffee.service.ProductService;
 
 @RestController
-@RequestMapping("/peoples")
+@RequestMapping("/persons")
 public class PersonController {
 	
 	@Autowired
