@@ -39,7 +39,7 @@ public class PersonController {
 	}
 
 	@PostMapping
-	public void PersontSave(@RequestBody @Valid Person people, BindingResult result) {
+	public void PersonSave(@RequestBody @Valid Person people, BindingResult result) {
 		if (!result.hasErrors()) {
 			service.savePerson(people);
 		}
@@ -47,7 +47,7 @@ public class PersonController {
 	}
 
 	@PutMapping("/{id}")
-	public void personUpdate(@PathVariable long id, @RequestBody @Valid Person entity, BindingResult result) {
+	public void PersonUpdate(@PathVariable long id, @RequestBody @Valid Person entity, BindingResult result) {
 		if (!result.hasErrors()) {
 			entity.setId(id);
 			service.savePerson(entity);
