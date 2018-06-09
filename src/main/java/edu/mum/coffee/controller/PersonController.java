@@ -1,5 +1,4 @@
 package edu.mum.coffee.controller;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,47 +13,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mum.coffee.PersonServiceTest;
+import edu.mum.coffee.domain.Person;
 import edu.mum.coffee.domain.Product;
+import edu.mum.coffee.service.PersonService;
 import edu.mum.coffee.service.ProductService;
 
 @RestController
-@RequestMapping("/products")
-public class ProductsController {
-
+@RequestMapping("/peoples")
+public class PersonController {
+	
 	@Autowired
-	private ProductService service;
-
-	@GetMapping
-	public List<Product> getProducts() {
-		return service.getAllProduct();
-	}
+	private PersonService service;
 
 	@GetMapping("/{id}")
-	public Product getProductsById(@PathVariable int id) {
-		return service.getProduct(id);
+	public Person getPersonById(@PathVariable int id) {
+		return service.findById((long) id);
 	}
 
 	@DeleteMapping("/{id}")
-	public void ProductsDelete(@PathVariable int id) {
-		service.delete(service.getProduct(id));
+	public void PersonsDelete(@PathVariable int id) {
+		service.removePerson(service.findById((long) id));
 	}
 
 	@PostMapping
-	public void ProductSave(@RequestBody @Valid Product product, BindingResult result) {
+	public void PersontSave(@RequestBody @Valid Person people, BindingResult result) {
 		if (!result.hasErrors()) {
-			service.save(product);
+			service.savePerson(people);
 		}
 
 	}
 
 	@PutMapping("/{id}")
-	public void ProductUpdate(@PathVariable int id, @RequestBody @Valid Product entity, BindingResult result) {
+	public void personUpdate(@PathVariable long id, @RequestBody @Valid Person entity, BindingResult result) {
 		if (!result.hasErrors()) {
 			entity.setId(id);
-			service.save(entity);
+			service.savePerson(entity);
 
 		}
 

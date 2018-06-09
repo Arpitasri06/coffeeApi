@@ -1,6 +1,5 @@
 package edu.mum.coffee.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,41 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Product;
-import edu.mum.coffee.service.ProductService;
+import edu.mum.coffee.service.OrderService;
 
 @RestController
-@RequestMapping("/products")
-public class ProductsController {
-
+@RequestMapping("/orders")
+public class OrderController {
+	
 	@Autowired
-	private ProductService service;
-
+	private OrderService service;
+	
 	@GetMapping
-	public List<Product> getProducts() {
-		return service.getAllProduct();
+	public List<Order> findAll() {
+		return service.findAll();
 	}
-
+	
 	@GetMapping("/{id}")
-	public Product getProductsById(@PathVariable int id) {
-		return service.getProduct(id);
+	public Order findById(@PathVariable int id) {
+		return service.findById(id);
 	}
 
 	@DeleteMapping("/{id}")
-	public void ProductsDelete(@PathVariable int id) {
-		service.delete(service.getProduct(id));
+	public void OrderDelete(@PathVariable int id) {
+		service.delete(service.findById(id));
 	}
 
 	@PostMapping
-	public void ProductSave(@RequestBody @Valid Product product, BindingResult result) {
+	public void OrderSave(@RequestBody @Valid Order order, BindingResult result) {
 		if (!result.hasErrors()) {
-			service.save(product);
+			service.save(order);
 		}
 
 	}
 
 	@PutMapping("/{id}")
-	public void ProductUpdate(@PathVariable int id, @RequestBody @Valid Product entity, BindingResult result) {
+	public void OrderUpdate(@PathVariable int id, @RequestBody @Valid Order entity, BindingResult result) {
 		if (!result.hasErrors()) {
 			entity.setId(id);
 			service.save(entity);
@@ -59,5 +59,5 @@ public class ProductsController {
 		}
 
 	}
-
+	
 }
