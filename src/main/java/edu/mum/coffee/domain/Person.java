@@ -17,10 +17,14 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String password;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	private String phone;
 	private boolean enable;
+	
+	private boolean admin;
 
 	public long getId() {
 		return id;
@@ -33,6 +37,9 @@ public class Person {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	
+	public boolean isAdmin() { return admin; }
+	public void setAdmin(boolean admin) { this.admin = admin; }
 
 	public String getFirstName() {
 		return firstName;
@@ -58,6 +65,14 @@ public class Person {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassworrd(String password) {
+		this.password = password;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -73,8 +88,8 @@ public class Person {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 

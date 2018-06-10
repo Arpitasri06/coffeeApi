@@ -88,8 +88,8 @@ public class Order {
 		}
 		orderLines.clear();
 	}
-	
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
